@@ -79,7 +79,7 @@ def settings():
 @task()
 def proxy(ctx):
      ctx.run(" ".join([
-          './oauth2-proxy',
+          'oauth2-proxy',
           '--provider=github',
           '--http-address', '0.0.0.0:${PORT}',
           '--reverse-proxy',
