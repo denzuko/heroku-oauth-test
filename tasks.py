@@ -63,7 +63,7 @@ def openapi_info():
 
 def settings():
     return {
-        "DEBUG": True,
+        "DEBUG": False,
         "API_VERSION": 'v1',
         "RENDERERS": ['eve.render.JSONRenderer'],
         "X_DOMAINS": ['*', 'http://editor.swagger.io' ],
