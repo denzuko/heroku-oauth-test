@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -eu
+
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+export_env_dir() {
+  env_dir=$1
+  whitelist_regex=${2:-''}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH|JAVA_OPTS)$'}
+  if [ -d "$env_dir" ]; then
+    for e in $(ls $env_dir); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $env_dir/$e)"
+      :
+    done
+  fi
+}
+
+BP_DIR="$(cd "$(dirname "$0")" && pwd)"
+BUILD_DIR=$1
+CACHE_DIR=$2
+OPT_DIR=$BP_DIR/../opt/
+
+export_env_dir $3
+
+PROXY_RELEASE=v7.1.3
+PROXY_OS=linux-amd64
+PROXY_VERSION=${PROXY_RELEASE}.${PROXY_OS}
+PROXY_URL=https://github.com/oauth2-proxy/oauth2-proxy/releases/download/${PROXY_RELEASE}/oauth2-proxy-${PROXY_VERSION}.tar.gz
+
+echo -n "-----> Installing oauth2-proxy... "
+curl -sSLk $PROXY_URL -o /tmp/oauth2-proxy.tgz | indent
+tar zxvf /tmp/oauth2-proxy.tgz --strip-components=1 -C $BUILD_DIR/bin/ oauth2-proxy-${PROXY_VERSION}/oauth2-proxy > /dev/null 2>&1
+chmod +x $BUILD_DIR/bin/oauth2-proxy
+echo "done"
