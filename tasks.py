@@ -26,7 +26,7 @@ __status__ = "Production"
 __version__ = "1.0.1"
 
 from eve import Eve
-from eve_swagger import swagger
+from eve_swagger import get_swagger_blueprint
 from invoke import task
 
 def schema():
@@ -107,6 +107,6 @@ def migrate(ctx):
 def serve(ctx):
 
     app = Eve(auth=None, settings=settings())
-    app.register_blueprint(swagger)
+    app.register_blueprint(get_swagger_blueprint)
 
     app.run(host='0.0.0.0', port=3000)
