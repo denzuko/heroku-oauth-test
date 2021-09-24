@@ -46,6 +46,8 @@
   "buildpacks": [
     {
       "url": "https://github.com/denzuko/heroku-oauth2-proxy-buildpack"
+    }, {
+      "url": "heroku/python"
     }
   ]
 }
