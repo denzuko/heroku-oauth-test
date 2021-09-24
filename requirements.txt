@@ -2,5 +2,6 @@ ansible
 invoke
 invocations
 docker-py
-terraform
+python-terraform
 awscli
+winrm
