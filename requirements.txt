@@ -8,3 +8,5 @@ google-cloud
 cloudflare
 python-node-red
 octorest
+eve
+eve-swagger
