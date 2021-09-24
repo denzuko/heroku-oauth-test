@@ -1,0 +1,6 @@
+ansible
+invoke
+invocations
+docker-py
+terraform
+awscli
