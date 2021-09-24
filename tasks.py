@@ -107,6 +107,6 @@ def migrate(ctx):
 def serve(ctx):
 
     app = Eve(auth=None, settings=settings())
-    app.register_blueprint(get_swagger_blueprint)
+    app.register_blueprint(get_swagger_blueprint())
 
     app.run(host='0.0.0.0', port=3000)
