@@ -42,10 +42,6 @@
   "scripts": {
     "postdeploy": "invoke migration"
   },
-  "formation": [{
-    "web": { "quantity": 1, "size": "free" }},
-    "app": { "quantity": 1, "size": "free" }
-  }],
   "addons": [
     {
       "plan": "heroku-postgresql",
