@@ -4,4 +4,7 @@ invocations
 docker-py
 python-terraform
 awscli
-winrm
+google-cloud
+cloudflare
+python-node-red
+octorest
