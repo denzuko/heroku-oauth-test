@@ -88,7 +88,7 @@ def deps(ctx):
           f"curl -sSLk {PROXY_URL} | tar zxvf --strip-components=1 >/dev/null 2>&1",
           'chmod +x ./oauth2-proxy',
           'echo "done"'
-     ])
+     ]))
 
 @task(pre=[deps])
 def proxy(ctx):
