@@ -78,6 +78,19 @@ def settings():
 
 
 @task
+def proxy(ctx):
+     ctx.run(" ".join([
+          'oauth2-proxy',
+          '--provider=github',
+          '--http-address', '0.0.0.0:${PORT}',
+          '--reverse-proxy',
+          '--upstream', '"http://localhost:3000"']))
+     
+@task
+def migrate(ctx):
+     pass
+
+@task(default=True)
 def serve(ctx):
 
     app = Eve(auth=None, settings=settings())
