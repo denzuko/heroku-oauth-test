@@ -17,7 +17,8 @@
     },
     "OAUTH2_PROXY_EMAIL_DOMAINS": {
       "description": "allowed email domains '*' for any.",
-      "value": "*"
+      "value": "*",
+      "required": false
     },
     "OAUTH2_PROXY_CLIENT_ID": {
       "description": "OAuth2 Client ID token",
@@ -29,7 +30,8 @@
     },
     "OAUTH2_PROXY_GITHUB_USER": {
       "description": "CSV of allowed github users",
-      "value": "denzuko"
+      "value": "denzuko",
+      "required": false
     }
   },
   "stack": "heroku-20",
@@ -43,8 +45,8 @@
   ],
   "buildpacks": [
     {
-      "url": "heroku/python",
-      "url": "https://github.com/denzuko/heroku-oauth2-proxy-buildpack"
+      "url": "https://github.com/denzuko/heroku-oauth2-proxy-buildpack",
+      "url": "heroku/python"
     }
   ]
 }
