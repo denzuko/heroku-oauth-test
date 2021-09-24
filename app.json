@@ -35,13 +35,7 @@
       "value": "denzuko"
     }
   },
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "standard-1x"
-    }
-  },
-  "image": "heroku/heroku:20",
+  "stack": "heroku-20",
   "addons": [
     {
       "plan": "heroku-postgresql",
@@ -52,7 +46,8 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/heroku/heroku-buildpack-python"
+      "url": "https://github.com/heroku/heroku-buildpack-python",
+      "url": "heroku/python"
     }
   ],
   "environments": {
