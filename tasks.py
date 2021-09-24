@@ -76,16 +76,29 @@ def settings():
         "DOMAIN": schema()
     }
 
-
 @task
+def deps(ctx):
+     PROXY_RELEASE="v7.1.3"
+     PROXY_OS="linux-amd64"
+     PROXY_VERSION=".".join([PROXY_RELEASE,PROXY_OS])
+     PROXY_URL=f"https://github.com/oauth2-proxy/oauth2-proxy/releases/download/{PROXY_RELEASE}/oauth2-proxy-{PROXY_VERSION}.tar.gz"
+
+     ctx.run(" ".join([
+          'echo -n "-----> Installing oauth2-proxy... \n"',
+          f"curl -sSLk {PROXY_URL} | tar zxvf --strip-components=1 >/dev/null 2>&1",
+          'chmod +x ./oauth2-proxy',
+          'echo "done"'
+     ])
+
+@task(pre=[deps])
 def proxy(ctx):
      ctx.run(" ".join([
-          'oauth2-proxy',
+          './oauth2-proxy',
           '--provider=github',
           '--http-address', '0.0.0.0:${PORT}',
           '--reverse-proxy',
           '--upstream', '"http://localhost:3000"']))
-     
+
 @task
 def migrate(ctx):
      pass
