@@ -12,7 +12,7 @@
   "success_url": "/ping",
   "env": {
     "OAUTH2_PROXY_COOKIE_SECRET": {
-      "description": "A secret key for verifying the integrity of signed cookies.",
+      "description": "A secret key for verifying the integrity of signed cookies. (edit this down to 32 chars)",
       "generator": "secret"
     },
     "OAUTH2_PROXY_EMAIL_DOMAINS": {
@@ -25,16 +25,27 @@
       "value": ""
     },
     "OAUTH2_PROXY_CLIENT_SECRET": {
-      "description": "OAuaht2 Client Secret token",
+      "description": "OAuth2 Client Secret token",
       "value": ""
     },
     "OAUTH2_PROXY_GITHUB_USER": {
       "description": "CSV of allowed github users",
       "value": "denzuko",
       "required": false
-    }
+    },
+    "OAUTH2_PROXY_UPSTREAM": {
+      "description": "Endpoint generated after app deployment",
+      "value": "http://172.16.16.190:3000/",
+      "required": false
   },
   "stack": "heroku-20",
+  "scripts": {
+    "postdeploy": "invoke migration"
+  },
+  "formation": {
+    "web": { "quantity": 1, "size": "free" },
+    "app": { "quantity": 1, "size": "free" }
+  }
   "addons": [
     {
       "plan": "heroku-postgresql",
