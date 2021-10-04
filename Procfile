@@ -1,2 +1,1 @@
-web: invoke proxy
-app: invoke serve
+web: invoke serve
