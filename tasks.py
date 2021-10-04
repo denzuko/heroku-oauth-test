@@ -62,6 +62,7 @@ def openapi_info():
     }
 
 def settings():
+""" Define application settings """
     return {
         "DEBUG": False,
         "API_VERSION": 'v1',
@@ -78,17 +79,18 @@ def settings():
 
 @task()
 def proxy(ctx):
+     """ Starts oauth2-proxy """
      ctx.run(" ".join([
           'oauth2-proxy',
           '--provider=github',
-          '--http-address', '0.0.0.0:${PORT}',
-          '--reverse-proxy']))
+          '--http-address', f"0.0.0.0:{os.environ.get(PORT, 8080)}",
+          '--reverse-proxy']), asynchronous=True)
 
 @task
 def migrate(ctx):
      pass
 
-@task(default=True)
+@task(default=True, pre=[proxy])
 def serve(ctx):
 
     app = Eve(auth=None, settings=settings())
