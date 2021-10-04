@@ -84,7 +84,7 @@ def proxy(ctx):
           'oauth2-proxy',
           '--provider=github',
           '--http-address', f"0.0.0.0:{os.environ.get(PORT, 8080)}",
-          '--reverse-proxy']), asynchronous=True)
+          '--reverse-proxy']), disown=True)
 
 @task
 def migrate(ctx):
